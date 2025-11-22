@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Question Paper Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">Question Paper Generator</div>
+        <div class="nav-links">
+            <span id="user-display">Welcome, User</span>
+            <button onclick="logout()" class="btn-logout">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+        <div class="sidebar">
+            <button class="nav-btn active" onclick="showSection('generate')">Generate Paper</button>
+            <button class="nav-btn" onclick="showSection('history')">My History</button>
+            <button class="nav-btn admin-only hidden" onclick="showSection('all-history')">All History (Admin)</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Generate Section -->
+            <div id="generate-section" class="content-section">
+                <h2>Generate New Question Paper</h2>
+                <form onsubmit="handleGenerate(event)">
+                    <div class="form-group">
+                        <label>Paper Title</label>
+                        <input type="text" id="paper-title" required placeholder="e.g., Mid-Term Exam 2024">
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" id="paper-subject" required placeholder="e.g., Physics">
+                    </div>
+                    <div class="form-group">
+                        <label>Difficulty</label>
+                        <select id="paper-difficulty">
+                            <option value="Easy">Easy</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Questions</label>
+                        <input type="number" id="paper-count" min="1" max="50" value="10" required>
+                    </div>
+                    <button type="submit" class="btn-primary" id="generate-btn">Generate with AI</button>
+                </form>
+                <div id="generation-result" class="hidden">
+                    <h3>Generated Paper</h3>
+                    <p id="result-message"></p>
+                    <button onclick="downloadCurrentPaper()" class="btn-secondary">Download PDF</button>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div id="history-section" class="content-section hidden">
+                <h2>My Generation History</h2>
+                <div id="history-list" class="paper-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- All History Section (Admin) -->
+            <div id="all-history-section" class="content-section hidden">
+                <h2>All Generation History</h2>
+                <div id="all-history-list" class="paper-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+    <script>
+        // Check auth on load
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'index.html';
+        }
+        loadDashboard();
+    </script>
+</body>
+
+</html>
