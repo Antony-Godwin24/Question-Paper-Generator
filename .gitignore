@@ -63,3 +63,5 @@ nbdist/
 
 # Environment Variables
 .env
+
+.py
