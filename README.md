@@ -66,8 +66,3 @@ A Spring Boot application that leverages Google's Gemini AI to automatically gen
 2.  Open your browser and navigate to `http://localhost:8080`.
 3.  Register/Login to access the generator.
 4.  Input the subject, difficulty, and other parameters to generate a question paper.
-
-## Security Note
-
--   **Never commit your `.env` file.** It is included in `.gitignore` to prevent accidental leakage of API keys and passwords.
--   If you suspect your keys are compromised, revoke them immediately and generate new ones.
