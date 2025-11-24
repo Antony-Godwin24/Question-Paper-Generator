@@ -7,13 +7,13 @@ A Spring Boot application that leverages Google's Gemini AI to automatically gen
 -   **AI-Powered Generation**: Uses Google Gemini 2.5 Flash model to generate relevant questions.
 -   **PDF Export**: Generates downloadable PDF question papers using iTextPDF.
 -   **User Authentication**: Secure login and registration using JWT (JSON Web Tokens).
--   **Database Integration**: Stores user data and generated papers in MySQL.
+-   **Database Integration**: Stores user data and generated papers in MongoDB.
 -   **Responsive UI**: Simple web interface for interacting with the generator.
 
 ## Tech Stack
 
 -   **Backend**: Java 17, Spring Boot 3.2.3
--   **Database**: MySQL 8
+-   **Database**: MongoDB
 -   **AI Model**: Google Gemini 2.5 Flash
 -   **Security**: Spring Security, JWT
 -   **PDF Generation**: iTextPDF
@@ -23,7 +23,7 @@ A Spring Boot application that leverages Google's Gemini AI to automatically gen
 
 -   Java 17 or higher
 -   Maven 3.6+
--   MySQL Server
+-   MongoDB (locally installed or via Docker)
 
 ## Setup & Installation
 
@@ -34,8 +34,8 @@ A Spring Boot application that leverages Google's Gemini AI to automatically gen
     ```
 
 2.  **Configure Database**
-    -   Create a MySQL database named `QnPaper`.
-    -   The application is configured to create tables automatically (`ddl-auto=update`).
+    -   Ensure MongoDB is running locally on the default port `27017`.
+    -   The application will automatically create the necessary database (`question-paper-generator`) and collections.
 
 3.  **Environment Variables**
     -   This project uses a `.env` file to manage secrets.
@@ -45,17 +45,14 @@ A Spring Boot application that leverages Google's Gemini AI to automatically gen
         ```
     -   Open `.env` and fill in your actual credentials:
         ```properties
-        DB_PASSWORD=your_mysql_password
-        JWT_SECRET=your_secure_jwt_secret
+        JWT_SECRET=your_secure_jwt_secret_at_least_512_bits
         GEMINI_API_KEY=your_google_gemini_api_key
         ```
+    -   **Security Note**: Never commit your `.env` file to version control. It is already added to `.gitignore`.
 
 4.  **Run the Application**
-    -   **Using IDE (IntelliJ/Eclipse)**:
-        -   Make sure to install a plugin like **EnvFile** to load the `.env` file into your run configuration.
-        -   Or manually set the environment variables in your IDE's Run Configuration.
-    -   **Using Command Line**:
-        -   You may need to export the variables first or pass them inline.
+    -   The project is configured with `spring-dotenv`, so it will automatically load variables from your `.env` file.
+    -   Simply run:
         ```bash
         mvn spring-boot:run
         ```
@@ -63,6 +60,6 @@ A Spring Boot application that leverages Google's Gemini AI to automatically gen
 ## Usage
 
 1.  Start the application.
-2.  Open your browser and navigate to `http://localhost:8080`.
+2.  Open your browser and navigate to `http://localhost:8081`.
 3.  Register/Login to access the generator.
 4.  Input the subject, difficulty, and other parameters to generate a question paper.

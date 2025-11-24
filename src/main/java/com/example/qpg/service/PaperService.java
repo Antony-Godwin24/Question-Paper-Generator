@@ -78,7 +78,7 @@ public class PaperService {
         return papers;
     }
 
-    public QuestionPaper getPaperById(Long id) {
+    public QuestionPaper getPaperById(String id) {
         return paperRepository.findById(id).orElseThrow(() -> new RuntimeException("Paper not found"));
     }
 }

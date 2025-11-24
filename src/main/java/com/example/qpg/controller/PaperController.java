@@ -45,7 +45,7 @@ public class PaperController {
     }
 
     @GetMapping("/{id}/download")
-    public ResponseEntity<byte[]> downloadPdf(@PathVariable Long id) {
+    public ResponseEntity<byte[]> downloadPdf(@PathVariable String id) {
         QuestionPaper paper = paperService.getPaperById(id);
         byte[] pdfBytes = pdfService.generatePdf(paper);
 

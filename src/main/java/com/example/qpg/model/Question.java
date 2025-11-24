@@ -1,32 +1,27 @@
 package com.example.qpg.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 
-@Entity
-@Table(name = "questions")
+@Document(collection = "questions")
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @Column(nullable = false)
     private String subject;
 
-    @Column(nullable = false)
     private String difficulty; // Easy, Medium, Hard
 
-    @Column(nullable = false)
     private String type; // MCQ, Descriptive, etc.
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

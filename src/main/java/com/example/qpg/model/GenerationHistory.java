@@ -1,32 +1,29 @@
 package com.example.qpg.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "generation_history")
+@Document(collection = "generation_history")
 public class GenerationHistory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "paper_id", nullable = false)
+    @DBRef
     private QuestionPaper questionPaper;
 
-    @ManyToOne
-    @JoinColumn(name = "generated_by_user_id", nullable = false)
+    @DBRef
     private User generatedBy;
 
-    @Column(nullable = false)
     private LocalDateTime timestamp;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
